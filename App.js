@@ -1,7 +1,7 @@
 //import 'react-native-gesture-handler';
 import React from 'react';
 
-import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import {View, Text, Image, Button, StyleSheet } from 'react-native';
 import Firstscreen from './screens/Firstscreen';
 import Registration from './screens/Registration';
 import Clientregistration from './screens/Clientregistration';
