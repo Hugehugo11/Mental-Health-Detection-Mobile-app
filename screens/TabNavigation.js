@@ -33,6 +33,21 @@ export default function TabNavigation()
     backgroundColor:'rgba(255,255,255,1)',
   },
   }}>
+   
+   <Tab.Screen 
+    name="Home" 
+    component={HomeScreen}
+    options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/home.png')}/>
+            );
+        }
+    }}
+     />   
+   
     <Tab.Screen 
     name="Search" 
     component={Searchproff}

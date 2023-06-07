@@ -11,6 +11,7 @@ import Clientregistration from './Clientregistration';
 import Login from "./Login";
 import Home from "./Homescreen";
 import TabNavigation from './TabNavigation';
+import HomeScreen from './Homescreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,9 +25,9 @@ export default function MyStack()
             <Stack.Screen name="Usertypescreen" component={Usertypescreen} options={{headerShown:false}}/>
             <Stack.Screen name="LoginSignupScreen" component={LoginSignupScreen}/>
             <Stack.Screen name="Registration" component={Registration}/>
-            <Stack.Screen name="Clientregistration" component={Clientregistration}/>
-            <Stack.Screen name="Login" component={Login}/>
-            <Stack.Screen name="Home" component={TabNavigation}/>
+            <Stack.Screen name="Clientregistration" component={Clientregistration} options={{headerShown:false}}/>
+            <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+            <Stack.Screen name="Home" component={TabNavigation} options={{headerShown:false}}/>
         </Stack.Navigator>
         </NavigationContainer>
     );
