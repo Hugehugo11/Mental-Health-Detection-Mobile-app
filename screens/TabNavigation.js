@@ -8,6 +8,7 @@ import Todolists from './Todolists';
 import Library from './Library';
 import Searchproff from './Searchproff';
 import Message from './Message';
+import Settings from './Settings';
 
 const Tab = createBottomTabNavigator();
 
@@ -90,14 +91,14 @@ export default function TabNavigation()
     }}
        />
     <Tab.Screen 
-    name="Library"
-     component={Library} 
+    name="Settings"
+     component={Settings} 
      options = {{
         tabBarIcon : ({size,focused,color}) => {
             return(
                 <Image 
                 style={{width:size,height:size}}
-                source={require('../assets/book.png')}/>
+                source={require('../assets/settings.png')}/>
             );
         }
     }}

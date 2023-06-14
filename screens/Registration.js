@@ -16,7 +16,7 @@ const Registration = ({ navigation }) => {
 
   const handleRegistration = () => {
     // handle registration logic here
-    navigation.navigate('Login')
+    navigation.navigate('Profflogin')
   };
 
   return (

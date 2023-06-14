@@ -12,11 +12,15 @@ import About from './screens/About';
 import Signlogin from './screens/Signlogin';
 import Logout from './screens/Logout';
 import MyStack from './screens/MyStack';
+import Todolists from './screens/Todolists';
+import Addtodo from './screens/Addtodo';
 //import DrawerNavigation from './screens/DrawerNavigation';
 
 const App = () => {
   return (
+  //<Addtodo/>
   <MyStack/>
+  //<About/>
   //<Firstscreen/>
   //<Signlogin/>
   //<Usertypescreen/>

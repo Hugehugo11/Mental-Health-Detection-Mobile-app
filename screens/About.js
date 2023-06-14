@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
-export default function About() {
+const AboutScreen = () => {
   return (
     <View>
-      <Text>About Screen</Text>
+      <Text>This is the About screen</Text>
     </View>
   );
-}
+};
+
+export default AboutScreen;

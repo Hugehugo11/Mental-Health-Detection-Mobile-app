@@ -1,20 +1,127 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ImageBackground } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import 'react-native-gesture-handler';
+import Todolists from './Todolists';
+import Library from './Library';
+import Searchproff from './Searchproff';
+import Message from './Message';
+import Settings from './Settings';
 
-const HomeScreen = ({ navigation }) => {
+
+
+const Tab = createBottomTabNavigator();
+
+export default function TabNavigation()
+{
+    return(
+    <Tab.Navigator
+    screenOptions={{
+    headerShown:false,
+    tabBarStyle:{    
+    position: 'absolute',
+    left:'5%',
+    flex:1,
+    width:'90%',
+    height:'8%',
+    justifyContent:'center',
+    alignSelf:'center',
+    alignItems:'center',
+    borderRadius:25,
+    paddingBottom:'2%',
+    paddingTop:'1%',
+    marginBottom:'3%',
+    backgroundColor:'rgba(255,255,255,1)',
+  },
+  }}>
+   
+   <Tab.Screen 
+    name="Home" 
+    component={Homeproff}
+    options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/home.png')}/>
+            );
+        }
+    }}
+     />   
+   
+    <Tab.Screen 
+    name="Search" 
+    component={Searchproff}
+    options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/search-.png')}/>
+            );
+        }
+    }}
+     />
+
+
+    <Tab.Screen
+     name="Todolist"
+      component={Todolists}
+      options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/todo-list.png')}/>
+            );
+        }
+    }} />
+
+    <Tab.Screen
+     name="Message"
+      component={Message}
+      options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/messenger.png')}/>
+            );
+        }
+    }}
+       />
+    <Tab.Screen 
+    name="Settings"
+     component={Settings} 
+     options = {{
+        tabBarIcon : ({size,focused,color}) => {
+            return(
+                <Image 
+                style={{width:size,height:size}}
+                source={require('../assets/settings.png')}/>
+            );
+        }
+    }}
+     />
+  </Tab.Navigator>
+    )
+};
+
+
+const Homeproff = ({ navigation }) => {
   const [loopedMessages, setLoopedMessages] = useState([
-    "Remember to take time for yourself today",
-    "It's Ok not to be Ok, but it's important to seek help",
-    "Never underestimate the power of sleep",
-    "Regular Exercise helps promote good mental health",
+    "Help others without any reason and give without the expectation of receiving anything in return.",
+    "Service to others is the rent you pay for your room here on earth.",
+    "Those who are happiest are those who do the most for others.",
+    "There is no better exercise for your heart than reaching down and helping to lift someone up.",
   ]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   const [slideshowImages, setSlideshowImages] = useState([
-    require('../assets/stressed1.png'),
-    require('../assets/stressed2.jpg'),
-    require('../assets/stressed3.jpg'),
-    require('../assets/stressed4.jpg'),
+    require('../assets/homeproff4.jpg'),
+    require('../assets/homeproff3.jpg'),
+    require('../assets/homeproff1.jpg'),
+    require('../assets/homeproff2.jpg'),
   ]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -40,7 +147,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
-        <Text style={styles.welcomeMessage}>Hello There !</Text>
+        <Text style={styles.welcomeMessage}>Hello There!  Welcome</Text>
       </View>
       <ImageBackground source={require('../assets/background1.jpg')} style={styles.imageBackground}>
         <View style={styles.loopedMessagesContainer}>
@@ -98,11 +205,13 @@ const styles = StyleSheet.create({
   },
   loopedMessage: {
     fontSize: 18,
+    fontWeight: 'bold',
+    //color: 'black',
     textAlign: 'center',
     paddingHorizontal: 20,
   },
   slideshowContainer: {
-    height: 200,
+    height: 250,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
@@ -138,6 +247,11 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  bottomTabStyle:{
+    position: 'absolute',
+    width:'90%',
+    justifyContent:'center',
+  }
 });
 
-export default HomeScreen;
+//export default Homeproff;

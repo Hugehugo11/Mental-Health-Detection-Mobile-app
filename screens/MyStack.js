@@ -12,6 +12,13 @@ import Login from "./Login";
 import Home from "./Homescreen";
 import TabNavigation from './TabNavigation';
 import HomeScreen from './Homescreen';
+import SettingsScreen from './Settings';
+import AboutScreen from './About';
+import Profflogin from './Profflogin';
+import Homeproff from './Homeproff';
+import Library from './Library';
+import TodoListScreen from './Todolists';
+import Addtodo from './Addtodo';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,10 +31,15 @@ export default function MyStack()
             <Stack.Screen name="Firstscreen" component={Firstscreen} options={{headerShown:false}}/>
             <Stack.Screen name="Usertypescreen" component={Usertypescreen} options={{headerShown:false}}/>
             <Stack.Screen name="LoginSignupScreen" component={LoginSignupScreen}/>
-            <Stack.Screen name="Registration" component={Registration}/>
+            <Stack.Screen name="Registration" component={Registration} options={{headerShown:false}}/>
             <Stack.Screen name="Clientregistration" component={Clientregistration} options={{headerShown:false}}/>
             <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
             <Stack.Screen name="Home" component={TabNavigation} options={{headerShown:false}}/>
+            <Stack.Screen name="Profflogin" component={Profflogin} options={{headerShown:false}}/>
+            <Stack.Screen name="Homeproff" component={Homeproff} options={{headerShown:false}}/>
+            <Stack.Screen name="About" component={AboutScreen} options={{headerShown:false}}/>
+            <Stack.Screen name="Library" component={Library} options={{headerShown:false}}/>
+            <Stack.Screen name="Addtodo" component={Addtodo} options={{headerShown:false}}/>
         </Stack.Navigator>
         </NavigationContainer>
     );
