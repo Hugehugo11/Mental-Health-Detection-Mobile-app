@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, TextInput } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import axios from 'axios';
 
 const Addtodo = () => {
-  const [todoTitle, setTodoTitle] = useState('');
-  const [todoDescription, setTodoDescription] = useState('');
-  const [scheduledFor, setScheduledFor] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleAddTodo = () => {
-    // Perform the necessary actions to add the todo to the MySQL database
-    // You can customize this function according to your database implementation
-    // You may use an API call or any other method to communicate with the database
+  const handleAddTodo = async () => {
+    try {
+      const response = await axios.post('http://192.168.43.77:70/api/todos', {
+        title,
+        description,
+        selectedDate,
+      });
 
-    // Display a success message or navigate back to the previous screen
+      setSuccessMessage('Todo added successfully');
+      console.log('Todo added successfully:', response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        console.log('Validation errors:', error.response.data);
+      } else {
+        console.error('Error adding todo:', error);
+      }
+    }
   };
 
   return (
@@ -24,8 +38,8 @@ const Addtodo = () => {
             <TextInput
               style={styles.input}
               placeholder="Enter todo item title"
-              value={todoTitle}
-              onChangeText={setTodoTitle}
+              value={title}
+              onChangeText={setTitle}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -33,17 +47,25 @@ const Addtodo = () => {
             <TextInput
               style={styles.input}
               placeholder="Enter todo item description"
-              value={todoDescription}
-              onChangeText={setTodoDescription}
+              value={description}
+              onChangeText={setDescription}
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Scheduled for:</Text>
-            {/* Implement calendar component here to select date */}
+            <Text style={styles.inputLabel}>Scheduled for</Text>
+            <Calendar
+              onDayPress={(day) => setSelectedDate(day.dateString)}
+            />
+            {selectedDate !== '' && (
+              <Text style={styles.selectedDateText}>Selected Date: {selectedDate}</Text>
+            )}
           </View>
           <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
             <Text style={styles.buttonText}>Add</Text>
           </TouchableOpacity>
+          {successMessage !== '' && (
+            <Text style={styles.successMessage}>{successMessage}</Text>
+          )}
         </View>
       </View>
     </ImageBackground>
@@ -86,11 +108,8 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'gray',
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: 'white',
   },
   addButton: {
     alignItems: 'center',
@@ -103,6 +122,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  selectedDateText: {
+    marginTop: 10,
+    color: 'white',
+    fontSize: 16,
+  },
+  successMessage: {
+    marginTop: 10,
+    color: 'green',
+    fontSize: 16,
   },
 });
 

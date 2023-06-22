@@ -7,6 +7,7 @@ import Library from './Library';
 import Searchproff from './Searchproff';
 import Message from './Message';
 import Settings from './Settings';
+import QuestionsScreen from './Questions';
 
 
 
@@ -51,7 +52,7 @@ export default function TabNavigation()
    
     <Tab.Screen 
     name="Search" 
-    component={Searchproff}
+    component={QuestionsScreen}
     options = {{
         tabBarIcon : ({size,focused,color}) => {
             return(
