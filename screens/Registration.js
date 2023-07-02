@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
+import axios from 'axios';
+
 
 const Registration = ({ navigation }) => {
   

@@ -13,7 +13,7 @@ import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios';
 import { url } from '../globals/Globals';
 
-const TodoListScreen = ({ navigation }) => {
+const Todoproff = ({ navigation }) => {
   const [todos, setTodos] = useState([]);
   const [todoTitle, setTodoTitle] = useState('');
   const [todoDescription, setTodoDescription] = useState('');
@@ -24,7 +24,7 @@ const TodoListScreen = ({ navigation }) => {
 
   const fetchTodoList = async () => {
     try {
-      const response = await axios.get(url + 'todos');
+      const response = await axios.get(url + 'todoproff');
       const todoList = response.data;
       setTodos(todoList);
     } catch (error) {
@@ -46,7 +46,7 @@ const TodoListScreen = ({ navigation }) => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.delete(url + `todos/${id}`);
+      await axios.delete(url + `todoproff/${id}`);
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
     } catch (error) {
       console.log('Error deleting todo:', error);
@@ -70,7 +70,7 @@ const TodoListScreen = ({ navigation }) => {
           description: todoDescription,
           selectedDate: todoDate,
         };
-        await axios.put(url + `todos/${selectedTodo.id}`, updatedTodo);
+        await axios.put(url + `todoproff/${selectedTodo.id}`, updatedTodo);
         setTodos((prevTodos) =>
           prevTodos.map((todo) => (todo.id === selectedTodo.id ? updatedTodo : todo))
         );
@@ -88,7 +88,7 @@ const TodoListScreen = ({ navigation }) => {
 
   const handleTodoCompleted = async (id, value) => {
     try {
-      await axios.put(url + `todos/${id}/complete`, { completed: value });
+      await axios.put(url + `todoproff/${id}/complete`, { completed: value });
       const updatedTodos = todos.map((todo) => {
         if (todo.id === id) {
           return { ...todo, completed: value };
@@ -112,7 +112,7 @@ const TodoListScreen = ({ navigation }) => {
             <Text style={styles.subHeaderText}>Click the Edit button to change your Todo and Delete button to remove it on your Todo List</Text>
           </View>
           <View style={styles.addTodoContainer}>
-            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Addtodo', { fetchTodoList: fetchTodoList })}>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Addtodoproff', { fetchTodoList: fetchTodoList })}>
               <Text style={styles.buttonText}>What do you have planned?</Text>
             </TouchableOpacity>
           </View>
@@ -297,4 +297,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TodoListScreen;
+export default Todoproff;

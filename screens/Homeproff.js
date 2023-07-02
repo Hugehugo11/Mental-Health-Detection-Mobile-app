@@ -8,6 +8,7 @@ import Searchproff from './Searchproff';
 import Message from './Message';
 import Settings from './Settings';
 import QuestionsScreen from './Questions';
+import Todoproff from './Todoproff';
 
 
 
@@ -51,7 +52,7 @@ export default function TabNavigation()
      />   
    
     <Tab.Screen 
-    name="Search" 
+    name="Questions" 
     component={QuestionsScreen}
     options = {{
         tabBarIcon : ({size,focused,color}) => {
@@ -67,7 +68,7 @@ export default function TabNavigation()
 
     <Tab.Screen
      name="Todolist"
-      component={Todolists}
+      component={Todoproff}
       options = {{
         tabBarIcon : ({size,focused,color}) => {
             return(

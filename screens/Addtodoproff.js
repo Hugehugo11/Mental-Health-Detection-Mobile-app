@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, TextInput } 
 import { Calendar } from 'react-native-calendars';
 import axios from 'axios';
 
-const Addtodo = ({ navigation, route }) => {
+const Addtodoproff = ({ navigation, route }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -12,7 +12,7 @@ const Addtodo = ({ navigation, route }) => {
 
   const handleAddTodo = async () => {
     try {
-      const response = await axios.post('http:///192.168.43.77:70/api/todos', {
+      const response = await axios.post('http:///192.168.43.77:70/api/todoproff', {
         title,
         description,
         selectedDate,
@@ -20,6 +20,7 @@ const Addtodo = ({ navigation, route }) => {
 
       setSuccessMessage('Todo added successfully');
       console.log('Todo added successfully:', response.data);
+      
     } catch (error) {
       if (error.response && error.response.status === 422) {
         console.log('Validation errors:', error.response.data);
@@ -138,4 +139,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Addtodo;
+export default Addtodoproff;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Linking, ImageBackground, ScrollView } from 'react-native';
 
 const LibraryScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -9,9 +9,12 @@ const LibraryScreen = () => {
     // Fetch books from API or local storage
     // Update the 'books' state with the fetched data
     const fetchedBooks = [
-      { id: 1, title: 'Book 1', author: 'Author 1', pdfUrl: 'https://transfer.sh/VIpaIlR7Dg/MCSE-Lecture-1_2022_Introduction.pdf' },
-      { id: 2, title: 'Book 2', author: 'Author 2', pdfUrl: 'https://transfer.sh/mEUCy41i2u/MCSE-Lecture-3%20and%204_2022.pdf' },
-      { id: 3, title: 'Book 3', author: 'Author 3', pdfUrl: 'https://transfer.sh/bUjlVt4t2r/MCSE-Lecture-9%20and%2010.pdf' },
+      { id: 1, title: 'Overcoming Depression', author: 'Lawrence E. Shapiro Phd', pdfUrl: 'https://transfer.sh/9O7o16ejQI/overcomingdepressionworkbook.pdf' },
+      { id: 2, title: 'Living with Anxiety', author: 'Paul Swift, Isabella Goldie', pdfUrl: 'https://transfer.sh/i8xy1PtGUG/01.%20Living%20with%20Anxiety%20Author%20Paul%20Swift%2C%20Eva%20Cyhlarova%2C%20Isabella%20Goldie.pdf' },
+      { id: 3, title: 'How to Overcome Fear & Anxiety', author: 'Mental Health Foundation', pdfUrl: 'https://transfer.sh/OKeP7o5rL5/MHF-How-to-overcome-fear-and-anxiety.pdf' },
+      { id: 4, title: 'Depression and Low Mood', author: 'Dr. Lesley Maunder, Dr.Lorna Cameroon', pdfUrl: 'https://transfer.sh/3i0Ml1cHs0/depression-and-low-mood.pdf' },
+      { id: 5, title: 'Depression The way out of your Prison', author: 'Dorothy Rowe', pdfUrl: 'https://transfer.sh/7BatHEE3IU/Depression%20The%20way%20out%20of%20your%20Prison.pdf' },
+      { id: 6, title: 'Anxiety and Panic attacks', author: 'Mental Health Charity', pdfUrl: 'https://transfer.sh/TNrBLlb6k6/12.%20Anxiety%20and%20panic%20attacks%20Author%20Mind%2C%20the%20mental%20health%20charity.pdf' },
       // Add more books here
     ];
     setBooks(fetchedBooks);
@@ -32,50 +35,62 @@ const LibraryScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search books"
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        onSubmitEditing={handleSearch}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleSearch}>
-        <Text style={styles.buttonText}>Search</Text>
-      </TouchableOpacity>
+    <ImageBackground source={require('../assets/background1.jpg')} style={styles.backgroundImage}>
+      <ScrollView style={styles.container}>
+        <View style={styles.contentContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Search books"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onSubmitEditing={handleSearch}
+          />
+          <TouchableOpacity style={styles.button} onPress={handleSearch}>
+            <Text style={styles.buttonText}>Search</Text>
+          </TouchableOpacity>
 
-      <View style={styles.bookList}>
-        {books.map((book) => (
-          <View key={book.id} style={styles.bookItem}>
-            <Text style={styles.bookTitle}>{book.title}</Text>
-            <Text style={styles.bookAuthor}>{book.author}</Text>
-            {!book.downloaded && (
-              <TouchableOpacity
-                style={styles.downloadButton}
-                onPress={() => handleDownload(book.pdfUrl)}
-              >
-                <Text style={styles.downloadButtonText}>Download</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        ))}
-      </View>
-    </View>
+          {books.map((book) => (
+            <View key={book.id} style={styles.bookItem}>
+              <View style={styles.bookDetails}>
+                <Text style={styles.bookTitle}>{book.title}</Text>
+                <Text style={styles.bookAuthor}>{book.author}</Text>
+              </View>
+              {!book.downloaded && (
+                <TouchableOpacity
+                  style={styles.downloadButton}
+                  onPress={() => handleDownload(book.pdfUrl)}
+                >
+                  <Text style={styles.downloadButtonText}>Download</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
-    padding: 10,
+  },
+  contentContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   input: {
     height: 40,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'black',
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 10,
+    color: 'black',
   },
   button: {
     backgroundColor: '#007AFF',
@@ -83,14 +98,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     marginBottom: 10,
+    alignItems: 'center',
   },
   buttonText: {
     color: '#FFF',
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  bookList: {
-    flex: 1,
+    textAlign: 'center',
   },
   bookItem: {
     flexDirection: 'row',
@@ -98,15 +112,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
+    borderBottomColor: 'gray',
+  },
+  bookDetails: {
+    flex: 1,
+    marginRight: 10,
   },
   bookTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
+    color: 'black',
   },
   bookAuthor: {
     fontSize: 14,
-    color: 'gray',
+    color: 'black',
+    marginTop: 5,
   },
   downloadButton: {
     backgroundColor: '#007AFF',

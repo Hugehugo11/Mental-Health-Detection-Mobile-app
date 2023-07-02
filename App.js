@@ -1,7 +1,7 @@
-//import 'react-native-gesture-handler';
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { ThemeProvider } from '@react-navigation/native';
 
-import {View, Text, Image, Button, StyleSheet } from 'react-native';
 import Firstscreen from './screens/Firstscreen';
 import Registration from './screens/Registration';
 import Clientregistration from './screens/Clientregistration';
@@ -14,24 +14,31 @@ import Logout from './screens/Logout';
 import MyStack from './screens/MyStack';
 import Todolists from './screens/Todolists';
 import Addtodo from './screens/Addtodo';
-//import DrawerNavigation from './screens/DrawerNavigation';
 
 const App = () => {
   return (
-  //<Addtodo/>
-  <MyStack/>
-  //<About/>
-  //<Firstscreen/>
-  //<Signlogin/>
-  //<Usertypescreen/>
-  //<Registration/>
-   //<Clientregistration/>
-   //<Login/>
-    //<Homescreen/>
-    //<ReviewDetails/>
-    //<About/>
+    
+      <View style={styles.container}>
+        {/* Your components go here */}
+        <MyStack />
+        {/* <About />
+        <Firstscreen />
+        <Signlogin />
+        <Registration />
+        <Clientregistration />
+        <Login />
+        <Homescreen />
+        <ReviewDetails /> */}
+      </View>
+  
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
 export default App;
